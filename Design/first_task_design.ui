@@ -57,7 +57,7 @@
       <x>9</x>
       <y>9</y>
       <width>112</width>
-      <height>71</height>
+      <height>100</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -80,7 +80,7 @@
        <item>
         <widget class="QDoubleSpinBox" name="dsp_width">
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::ClickFocus</enum>
          </property>
          <property name="minimum">
           <double>-180.000000000000000</double>
@@ -110,7 +110,7 @@
        <item>
         <widget class="QDoubleSpinBox" name="dsp_long">
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::ClickFocus</enum>
          </property>
          <property name="minimum">
           <double>-180.000000000000000</double>
@@ -121,6 +121,13 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>Отобразить карту</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
