@@ -2,17 +2,17 @@ import os
 import sys
 
 import requests
+from PyQt5 import uic
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel
-
-SCREEN_SIZE = [600, 450]
+from PyQt5.QtWidgets import *
 
 
-class Example(QWidget):
+class Example(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.getImage()
-        self.initUI()
+        # self.getImage()
+        # self.initUI()
+        uic.loadUi(r'../Design/first_task_design.ui', self)  # Загружаем дизайн
 
     def getImage(self):
         map_request = "http://static-maps.yandex.ru/1.x/?ll=37.530887,55.703118&spn=0.002,0.002&l=map"
