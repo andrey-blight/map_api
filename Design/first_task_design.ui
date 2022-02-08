@@ -57,7 +57,7 @@
       <x>9</x>
       <y>9</y>
       <width>112</width>
-      <height>100</height>
+      <height>188</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -127,6 +127,37 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Выберете слой</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="rbtn_map">
+       <property name="text">
+        <string>Схема</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="rbtn_sat">
+       <property name="text">
+        <string>Спутник</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="rbtn_skl">
+       <property name="text">
+        <string>Гибрид</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="pushButton">

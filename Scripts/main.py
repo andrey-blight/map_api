@@ -17,6 +17,7 @@ class YandexMap(QMainWindow, Ui_MainWindow):
         self.zoom = 0.1  # map zoom
         self.cords_long = 37.61
         self.cords_width = 55.75
+        self.layer = "map"  # map layout
         self.setupUi(self)  # load design
         self.show_map()  # show map with start cords
         self.setFocusPolicy(Qt.StrongFocus)  # for working arrows
@@ -31,7 +32,7 @@ class YandexMap(QMainWindow, Ui_MainWindow):
             "ll": f"{self.cords_long},{self.cords_width}",
             "size": f"{WIDTH},{HEIGHT}",
             "spn": f"{self.zoom},{self.zoom}",
-            "l": "map"}
+            "l": self.layer}
         response = requests.get(MAP_API_SERVER, params=map_params)
         pixmap = QPixmap()  # container for map
         pixmap.loadFromData(BytesIO(response.content).read(), "PNG")  # save image to pixmap from RAM
@@ -46,6 +47,7 @@ class YandexMap(QMainWindow, Ui_MainWindow):
             if event.key() == Qt.Key_PageDown:
                 self.zoom = max(self.zoom - self.zoom * 0.5, 0.0001)
         if event.key() in {Qt.Key_Up, Qt.Key_Down, Qt.Key_Left, Qt.Key_Right}:
+            # moving map using arrows
             if event.key() == Qt.Key_Up:
                 self.cords_width = min(85, self.cords_width + self.zoom)
                 self.dsp_width.setValue(self.cords_width)
