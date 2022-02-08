@@ -30,16 +30,6 @@ class YandexMap(QMainWindow, Ui_MainWindow):
         pixmap.loadFromData(BytesIO(response.content).read(), "PNG")  # save image to pixmap from RAM
         self.lbl_map.setPixmap(pixmap)  # load map to label
 
-    def keyPressEvent(self, event: QKeyEvent):
-        # we will change value to 50%
-        if event.key() == Qt.Key_PageUp:
-            # max value is (90 - |width|) because this is the edge of the map + 10 for zooming another part of the map
-            self.zoom = min(90 - abs(self.dsp_width.value()) + 10, self.zoom + self.zoom * 0.5)
-            self.show_map()  # change zoom and repaint map
-        if event.key() == Qt.Key_PageDown:
-            self.zoom = max(self.zoom - self.zoom * 0.5, 0.0001)
-            self.show_map()  # change zoom and repaint map
-
 
 def except_hook(cls, exception, traceback):
     sys.__excepthook__(cls, exception, traceback)
