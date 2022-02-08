@@ -29,8 +29,8 @@
    <widget class="QLabel" name="lbl_map">
     <property name="geometry">
      <rect>
-      <x>191</x>
-      <y>10</y>
+      <x>180</x>
+      <y>0</y>
       <width>600</width>
       <height>450</height>
      </rect>
@@ -137,6 +137,9 @@
      </item>
      <item>
       <widget class="QRadioButton" name="rbtn_map">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="text">
         <string>Схема</string>
        </property>
@@ -147,6 +150,9 @@
      </item>
      <item>
       <widget class="QRadioButton" name="rbtn_sat">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="text">
         <string>Спутник</string>
        </property>
@@ -154,6 +160,9 @@
      </item>
      <item>
       <widget class="QRadioButton" name="rbtn_skl">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="text">
         <string>Гибрид</string>
        </property>

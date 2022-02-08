@@ -21,21 +21,34 @@ class YandexMap(QMainWindow, Ui_MainWindow):
         self.setupUi(self)  # load design
         self.show_map()  # show map with start cords
         self.setFocusPolicy(Qt.StrongFocus)  # for working arrows
-        self.btn_show.clicked.connect(self.btn_show_map)
+        self.btn_show.clicked.connect(self.change_conditions)
+        self.rbtn_map.clicked.connect(self.change_conditions)
+        self.rbtn_sat.clicked.connect(self.change_conditions)
+        self.rbtn_skl.clicked.connect(self.change_conditions)
 
-    def btn_show_map(self):
-        self.cords_long, self.cords_width = self.dsp_long.value(), self.dsp_width.value()  # update cords
+    def change_conditions(self):
+        if self.sender() == self.rbtn_map:
+            self.layer = "map"
+        if self.sender() == self.rbtn_sat:
+            self.layer = "sat"
+        if self.sender() == self.rbtn_skl:
+            self.layer = "sat,skl"
+        if self.sender() == self.btn_show:
+            self.cords_long, self.cords_width = self.dsp_long.value(), self.dsp_width.value()  # update cords
         self.show_map()
 
     def show_map(self):
         map_params = {
             "ll": f"{self.cords_long},{self.cords_width}",
+            "l": self.layer,
             "size": f"{WIDTH},{HEIGHT}",
-            "spn": f"{self.zoom},{self.zoom}",
-            "l": self.layer}
+            "spn": f"{self.zoom},{self.zoom}"}
         response = requests.get(MAP_API_SERVER, params=map_params)
         pixmap = QPixmap()  # container for map
-        pixmap.loadFromData(BytesIO(response.content).read(), "PNG")  # save image to pixmap from RAM
+        expansion = "JPEG"  # image expansion
+        if self.layer == "map":
+            expansion = "PNG"  # if we have map image will be PNG
+        pixmap.loadFromData(BytesIO(response.content).read(), expansion)  # save image to pixmap from RAM
         self.lbl_map.setPixmap(pixmap)  # load map to label
 
     def keyPressEvent(self, event: QKeyEvent):
