@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import *
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        MainWindow.setWindowTitle("Яндекс карты")
         MainWindow.resize(800, 470)
         MainWindow.setMinimumSize(QSize(800, 470))
         MainWindow.setMaximumSize(QSize(800, 470))
@@ -23,8 +24,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.lbl2)
         self.dsp_width = QDoubleSpinBox(self.widget)
         self.dsp_width.setFocusPolicy(Qt.ClickFocus)
-        self.dsp_width.setMinimum(-180.000000000000000)
-        self.dsp_width.setMaximum(180.000000000000000)
+        self.dsp_width.setMinimum(-180)
+        self.dsp_width.setMaximum(180)
+        self.dsp_width.setValue(55.75)
         self.horizontalLayout.addWidget(self.dsp_width)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.horizontalLayout_2 = QHBoxLayout()
@@ -32,8 +34,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.lbl3)
         self.dsp_long = QDoubleSpinBox(self.widget)
         self.dsp_long.setFocusPolicy(Qt.ClickFocus)
-        self.dsp_long.setMinimum(-180.000000000000000)
-        self.dsp_long.setMaximum(180.000000000000000)
+        self.dsp_long.setMinimum(-180)
+        self.dsp_long.setMaximum(180)
+        self.dsp_long.setValue(37.61)
         self.horizontalLayout_2.addWidget(self.dsp_long)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.btn_show = QPushButton("Отобразить карту", self.widget)
