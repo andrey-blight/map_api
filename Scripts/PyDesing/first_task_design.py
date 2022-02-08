@@ -1,6 +1,6 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-
+from PyQt5.QtGui import *
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -8,12 +8,12 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QSize(800, 470))
         MainWindow.setMaximumSize(QSize(800, 470))
         self.centralwidget = QWidget(MainWindow)
-        self.lbl_map = QLabel("", self.centralwidget)
-        self.lbl_map.setGeometry(QRect(191, 10, 600, 450))
+        self.lbl_map = QLabel(self.centralwidget)
+        self.lbl_map.setGeometry(QRect(180, 0, 600, 450))
         self.lbl_map.setMinimumSize(QSize(600, 450))
         self.lbl_map.setMaximumSize(QSize(600, 450))
         self.layoutWidget = QWidget(self.centralwidget)
-        self.layoutWidget.setGeometry(QRect(9, 9, 112, 188))
+        self.layoutWidget.setGeometry(QRect(9, 9, 112, 243))
         self.verticalLayout = QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.lbl1 = QLabel("Введите координаты", self.layoutWidget)
@@ -39,11 +39,11 @@ class Ui_MainWindow(object):
         self.dsp_long.setValue(37.609999999999999)
         self.horizontalLayout_2.addWidget(self.dsp_long)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
-        self.label = QLabel("Выберете слой", self.layoutWidget)
-        self.verticalLayout.addWidget(self.label)
+        self.lbl4 = QLabel("Выберете слой", self.layoutWidget)
+        self.verticalLayout.addWidget(self.lbl4)
         self.rbtn_map = QRadioButton("Схема", self.layoutWidget)
-        self.rbtn_map.setChecked(True)
         self.rbtn_map.setFocusPolicy(Qt.NoFocus)
+        self.rbtn_map.setChecked(True)
         self.verticalLayout.addWidget(self.rbtn_map)
         self.rbtn_sat = QRadioButton("Спутник", self.layoutWidget)
         self.rbtn_sat.setFocusPolicy(Qt.NoFocus)
@@ -52,5 +52,16 @@ class Ui_MainWindow(object):
         self.rbtn_skl.setFocusPolicy(Qt.NoFocus)
         self.verticalLayout.addWidget(self.rbtn_skl)
         self.btn_show = QPushButton("Отобразить карту", self.layoutWidget)
+        self.btn_show.setFocusPolicy(Qt.ClickFocus)
         self.verticalLayout.addWidget(self.btn_show)
+        self.le_obj = QLineEdit(self.layoutWidget)
+        font = QFont()
+        font.setStyleStrategy(QFont.PreferAntialias)
+        self.le_obj.setFont(font)
+        self.le_obj.setFocusPolicy(Qt.ClickFocus)
+        self.le_obj.setPlaceholderText("Введите объект")
+        self.verticalLayout.addWidget(self.le_obj)
+        self.btn_find_obj = QPushButton("Поиск объекта", self.layoutWidget)
+        self.btn_find_obj.setFocusPolicy(Qt.ClickFocus)
+        self.verticalLayout.addWidget(self.btn_find_obj)
         MainWindow.setCentralWidget(self.centralwidget)
