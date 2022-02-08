@@ -8,20 +8,27 @@ from io import BytesIO
 
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from PyQt5.Qt import *
+from PyQt5.QtCore import *
 
 
 class YandexMap(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.zoom = 0.1  # map zoom
+        self.cords_long = 37.61
+        self.cords_width = 55.75
         self.setupUi(self)  # load design
         self.show_map()  # show map with start cords
-        self.btn_show.clicked.connect(self.show_map)
+        self.setFocusPolicy(Qt.StrongFocus)  # for working arrows
+        self.btn_show.clicked.connect(self.btn_show_map)
+
+    def btn_show_map(self):
+        self.cords_long, self.cords_width = self.dsp_long.value(), self.dsp_width.value()  # update cords
+        self.show_map()
 
     def show_map(self):
         map_params = {
-            "ll": ",".join(str(s) for s in [self.dsp_long.value(), self.dsp_width.value()]),
+            "ll": f"{self.cords_long},{self.cords_width}",
             "size": f"{WIDTH},{HEIGHT}",
             "spn": f"{self.zoom},{self.zoom}",
             "l": "map"}
@@ -31,14 +38,31 @@ class YandexMap(QMainWindow, Ui_MainWindow):
         self.lbl_map.setPixmap(pixmap)  # load map to label
 
     def keyPressEvent(self, event: QKeyEvent):
-        # we will change value to 50%
-        if event.key() == Qt.Key_PageUp:
-            # max value is (90 - |width|) because this is the edge of the map + 10 for zooming another part of the map
-            self.zoom = min(90 - abs(self.dsp_width.value()) + 10, self.zoom + self.zoom * 0.5)
-            self.show_map()  # change zoom and repaint map
-        if event.key() == Qt.Key_PageDown:
-            self.zoom = max(self.zoom - self.zoom * 0.5, 0.0001)
-            self.show_map()  # change zoom and repaint map
+        if event.key() in {Qt.Key_PageUp, Qt.Key_PageDown}:
+            # we will change value to 50%;  max value is (90 - |width| + 10)
+            # because this is the edge of the map and 10 for zooming another part of the map
+            if event.key() == Qt.Key_PageUp:
+                self.zoom = min(90 - abs(self.dsp_width.value()) + 10, self.zoom + self.zoom * 0.5)
+            if event.key() == Qt.Key_PageDown:
+                self.zoom = max(self.zoom - self.zoom * 0.5, 0.0001)
+        if event.key() in {Qt.Key_Up, Qt.Key_Down, Qt.Key_Left, Qt.Key_Right}:
+            if event.key() == Qt.Key_Up:
+                self.cords_width = min(85, self.cords_width + self.zoom)
+                self.dsp_width.setValue(self.cords_width)
+            if event.key() == Qt.Key_Down:
+                self.cords_width = max(-85, self.cords_width - self.zoom)
+                self.dsp_width.setValue(self.cords_width)
+            if event.key() == Qt.Key_Left:
+                self.cords_long -= self.zoom
+                if self.cords_long < -180:
+                    self.cords_long = 180 + (self.cords_long + 180)
+                self.dsp_long.setValue(self.cords_long)
+            if event.key() == Qt.Key_Right:
+                self.cords_long += self.zoom
+                if self.cords_long > 180:
+                    self.cords_long = -180 + (self.cords_long - 180)
+                self.dsp_long.setValue(self.cords_long)
+        self.show_map()  # change and repaint map
 
 
 def except_hook(cls, exception, traceback):
