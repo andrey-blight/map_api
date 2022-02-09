@@ -57,7 +57,7 @@
       <x>9</x>
       <y>9</y>
       <width>112</width>
-      <height>272</height>
+      <height>310</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -179,7 +179,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="le_obj">
        <property name="font">
         <font>
          <stylestrategy>PreferAntialias</stylestrategy>
@@ -193,6 +193,20 @@
        </property>
        <property name="placeholderText">
         <string>Введите объект</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbl_5">
+       <property name="text">
+        <string>Адрес объекта:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="obj_address">
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </item>
