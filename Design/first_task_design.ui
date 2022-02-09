@@ -22,6 +22,11 @@
     <height>470</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <stylestrategy>PreferDefault</stylestrategy>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Яндекс карты</string>
   </property>
@@ -47,6 +52,11 @@
       <height>450</height>
      </size>
     </property>
+    <property name="font">
+     <font>
+      <stylestrategy>PreferDefault</stylestrategy>
+     </font>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -57,7 +67,7 @@
       <x>9</x>
       <y>9</y>
       <width>112</width>
-      <height>310</height>
+      <height>368</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -197,16 +207,19 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="lbl_5">
+      <widget class="QLabel" name="lbl5">
        <property name="text">
         <string>Адрес объекта:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="obj_address">
-       <property name="text">
-        <string/>
+      <widget class="QTextEdit" name="le_obj_address">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

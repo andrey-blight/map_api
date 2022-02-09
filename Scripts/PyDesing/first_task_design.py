@@ -10,6 +10,9 @@ class Ui_MainWindow(object):
         MainWindow.resize(800, 470)
         MainWindow.setMinimumSize(QSize(800, 470))
         MainWindow.setMaximumSize(QSize(800, 470))
+        font = QFont()
+        font.setStyleStrategy(QFont.PreferDefault)
+        MainWindow.setFont(font)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.lbl_map = QLabel(self.centralwidget)
@@ -17,9 +20,10 @@ class Ui_MainWindow(object):
         self.lbl_map.setGeometry(QRect(180, 0, 600, 450))
         self.lbl_map.setMinimumSize(QSize(600, 450))
         self.lbl_map.setMaximumSize(QSize(600, 450))
+        self.lbl_map.setFont(font)
         self.layoutWidget = QWidget(self.centralwidget)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(9, 9, 112, 310))
+        self.layoutWidget.setGeometry(QRect(9, 9, 112, 368))
         self.verticalLayout = QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -97,22 +101,24 @@ class Ui_MainWindow(object):
 
         self.le_obj = QLineEdit(self.layoutWidget)
         self.le_obj.setObjectName(u"le_obj")
-        font = QFont()
-        font.setStyleStrategy(QFont.PreferAntialias)
-        self.le_obj.setFont(font)
+        font1 = QFont()
+        font1.setStyleStrategy(QFont.PreferAntialias)
+        self.le_obj.setFont(font1)
         self.le_obj.setFocusPolicy(Qt.ClickFocus)
 
         self.verticalLayout.addWidget(self.le_obj)
 
-        self.lbl_5 = QLabel(self.layoutWidget)
-        self.lbl_5.setObjectName(u"lbl_5")
+        self.lbl5 = QLabel(self.layoutWidget)
+        self.lbl5.setObjectName(u"lbl5")
 
-        self.verticalLayout.addWidget(self.lbl_5)
+        self.verticalLayout.addWidget(self.lbl5)
 
-        self.obj_address = QLabel(self.layoutWidget)
-        self.obj_address.setObjectName(u"obj_address")
+        self.le_obj_address = QTextEdit(self.layoutWidget)
+        self.le_obj_address.setObjectName(u"le_obj_address")
+        self.le_obj_address.setFocusPolicy(Qt.NoFocus)
+        self.le_obj_address.setReadOnly(True)
 
-        self.verticalLayout.addWidget(self.obj_address)
+        self.verticalLayout.addWidget(self.le_obj_address)
 
         self.btn_find_obj = QPushButton(self.layoutWidget)
         self.btn_find_obj.setObjectName(u"btn_find_obj")
@@ -158,10 +164,9 @@ class Ui_MainWindow(object):
         self.le_obj.setPlaceholderText(QCoreApplication.translate("MainWindow",
                                                                   u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043e\u0431\u044a\u0435\u043a\u0442",
                                                                   None))
-        self.lbl_5.setText(QCoreApplication.translate("MainWindow",
-                                                      u"\u0410\u0434\u0440\u0435\u0441 \u043e\u0431\u044a\u0435\u043a\u0442\u0430:",
-                                                      None))
-        self.obj_address.setText("")
+        self.lbl5.setText(QCoreApplication.translate("MainWindow",
+                                                     u"\u0410\u0434\u0440\u0435\u0441 \u043e\u0431\u044a\u0435\u043a\u0442\u0430:",
+                                                     None))
         self.btn_find_obj.setText(QCoreApplication.translate("MainWindow",
                                                              u"\u041f\u043e\u0438\u0441\u043a \u043e\u0431\u044a\u0435\u043a\u0442\u0430",
                                                              None))

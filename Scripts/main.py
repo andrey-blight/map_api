@@ -18,7 +18,8 @@ class YandexMap(QMainWindow, Ui_MainWindow):
         self.cords_long = 37.61
         self.cords_width = 55.75
         self.layer = "map"  # map layout
-        self.mark = None  # mark of object
+        self.obj_mark = None  # mark of object
+        self.obj_address = ""  # address of object
         self.setupUi(self)  # load design
         self.show_map()  # show map with start cords
         self.setFocusPolicy(Qt.StrongFocus)  # for working arrows
@@ -49,14 +50,20 @@ class YandexMap(QMainWindow, Ui_MainWindow):
                 obj = response_json["response"]["GeoObjectCollection"][
                     "featureMember"][0]  # get object from description
                 self.cords_long, self.cords_width = map(float, obj["GeoObject"]["Point"]["pos"].split())
-                self.mark = f"{self.cords_long},{self.cords_width}"  # save our mark
+                self.obj_mark = f"{self.cords_long},{self.cords_width}"  # save our obj_mark
                 # change value of long and width
                 self.dsp_long.setValue(self.cords_long), self.dsp_width.setValue(self.cords_width)
+                self.obj_address = obj["GeoObject"]["metaDataProperty"]["GeocoderMetaData"]["Address"]["formatted"]
+                self.le_obj_address.setText(self.obj_address)
             except IndexError:
                 # if we didn't find object show message about it
                 QMessageBox.about(self, "Info", "Такого объекта не найдено")
+                self.le_obj.setText("")
         if self.sender() == self.btn_clear:
-            self.mark = None
+            self.obj_mark = None
+            self.obj_address = ""
+            self.le_obj.setText("")
+            self.le_obj_address.setText("")
         self.show_map()
 
     def show_map(self):
@@ -65,8 +72,8 @@ class YandexMap(QMainWindow, Ui_MainWindow):
             "l": self.layer,
             "size": f"{WIDTH},{HEIGHT}",
             "spn": f"{self.zoom},{self.zoom}"}
-        if self.mark is not None:
-            map_params["pt"] = self.mark
+        if self.obj_mark is not None:
+            map_params["pt"] = self.obj_mark
         response = requests.get(MAP_API_SERVER, params=map_params)
         pixmap = QPixmap()  # container for map
         expansion = "JPEG"  # image expansion
@@ -80,7 +87,7 @@ class YandexMap(QMainWindow, Ui_MainWindow):
             # we will change value to 50%;  max value is (90 - |width| + 10)
             # because this is the edge of the map and 10 for zooming another part of the map
             if event.key() == Qt.Key_PageUp:
-                self.zoom = min(90 - abs(self.dsp_width.value()) + 9, self.zoom + self.zoom * 0.5)
+                self.zoom = min(90 - abs(self.dsp_width.value()) + 9, self.zoom + self.zoom * 0.65)
             if event.key() == Qt.Key_PageDown:
                 self.zoom = max(self.zoom - self.zoom * 0.5, 0.0001)
         if event.key() in {Qt.Key_Up, Qt.Key_Down, Qt.Key_Left, Qt.Key_Right}:
