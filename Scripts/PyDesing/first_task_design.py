@@ -2,8 +2,10 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        MainWindow.setWindowTitle("Яндекс карты")
         MainWindow.resize(800, 470)
         MainWindow.setMinimumSize(QSize(800, 470))
         MainWindow.setMaximumSize(QSize(800, 470))
