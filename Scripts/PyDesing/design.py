@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
         self.lbl_map.setFont(font)
         self.layoutWidget = QWidget(self.centralwidget)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(9, 9, 112, 368))
+        self.layoutWidget.setGeometry(QRect(9, 9, 115, 414))
         self.verticalLayout = QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -75,6 +75,9 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.lbl4)
 
         self.rbtn_map = QRadioButton(self.layoutWidget)
+        self.buttonGroup = QButtonGroup(MainWindow)
+        self.buttonGroup.setObjectName(u"buttonGroup")
+        self.buttonGroup.addButton(self.rbtn_map)
         self.rbtn_map.setObjectName(u"rbtn_map")
         self.rbtn_map.setFocusPolicy(Qt.NoFocus)
         self.rbtn_map.setChecked(True)
@@ -82,12 +85,14 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.rbtn_map)
 
         self.rbtn_sat = QRadioButton(self.layoutWidget)
+        self.buttonGroup.addButton(self.rbtn_sat)
         self.rbtn_sat.setObjectName(u"rbtn_sat")
         self.rbtn_sat.setFocusPolicy(Qt.NoFocus)
 
         self.verticalLayout.addWidget(self.rbtn_sat)
 
         self.rbtn_skl = QRadioButton(self.layoutWidget)
+        self.buttonGroup.addButton(self.rbtn_skl)
         self.rbtn_skl.setObjectName(u"rbtn_skl")
         self.rbtn_skl.setFocusPolicy(Qt.NoFocus)
 
@@ -107,6 +112,11 @@ class Ui_MainWindow(object):
         self.le_obj.setFocusPolicy(Qt.ClickFocus)
 
         self.verticalLayout.addWidget(self.le_obj)
+
+        self.check_post = QCheckBox(self.layoutWidget)
+        self.check_post.setObjectName(u"check_post")
+
+        self.verticalLayout.addWidget(self.check_post)
 
         self.lbl5 = QLabel(self.layoutWidget)
         self.lbl5.setObjectName(u"lbl5")
@@ -164,6 +174,9 @@ class Ui_MainWindow(object):
         self.le_obj.setPlaceholderText(QCoreApplication.translate("MainWindow",
                                                                   u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043e\u0431\u044a\u0435\u043a\u0442",
                                                                   None))
+        self.check_post.setText(QCoreApplication.translate("MainWindow",
+                                                           u"\u041f\u043e\u0447\u0442\u043e\u0432\u044b\u0439 \u0438\u043d\u0434\u0435\u043a\u0441",
+                                                           None))
         self.lbl5.setText(QCoreApplication.translate("MainWindow",
                                                      u"\u0410\u0434\u0440\u0435\u0441 \u043e\u0431\u044a\u0435\u043a\u0442\u0430:",
                                                      None))

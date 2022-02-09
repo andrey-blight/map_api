@@ -1,4 +1,4 @@
-from PyDesing.first_task_design import Ui_MainWindow
+from PyDesing.design import Ui_MainWindow
 from constans import *
 
 import os
@@ -19,7 +19,7 @@ class YandexMap(QMainWindow, Ui_MainWindow):
         self.cords_width = 55.75
         self.layer = "map"  # map layout
         self.obj_mark = None  # mark of object
-        self.obj_address = ""  # address of object
+        self.post = None
         self.setupUi(self)  # load design
         self.show_map()  # show map with start cords
         self.setFocusPolicy(Qt.StrongFocus)  # for working arrows
@@ -53,18 +53,27 @@ class YandexMap(QMainWindow, Ui_MainWindow):
                 self.obj_mark = f"{self.cords_long},{self.cords_width}"  # save our obj_mark
                 # change value of long and width
                 self.dsp_long.setValue(self.cords_long), self.dsp_width.setValue(self.cords_width)
-                self.obj_address = obj["GeoObject"]["metaDataProperty"]["GeocoderMetaData"]["Address"]["formatted"]
-                self.le_obj_address.setText(self.obj_address)
+                # get address from response
+                obj_address = obj["GeoObject"]["metaDataProperty"]["GeocoderMetaData"]["Address"]["formatted"]
+                self.le_obj_address.setText(obj_address)  # set address to text box
+                try:
+                    if self.check_post.isChecked():
+                        # add post to text box
+                        post = obj["GeoObject"]["metaDataProperty"]["GeocoderMetaData"]["Address"]["postal_code"]
+                        self.post = f". Почтовый индекс: {post}"
+                        self.le_obj_address.setText(self.le_obj_address.toPlainText() + self.post)
+                except KeyError:
+                    QMessageBox.about(self, "Info", "У этого адреса нет почтового индекса")
+                    self.post = None
             except IndexError:
                 # if we didn't find object show message about it
                 QMessageBox.about(self, "Info", "Такого объекта не найдено")
-                self.le_obj.setText("")
+                self.le_obj.setText("")  # clear line edit
         if self.sender() == self.btn_clear:
-            self.obj_mark = None
-            self.obj_address = ""
-            self.le_obj.setText("")
-            self.le_obj_address.setText("")
-        self.show_map()
+            self.obj_mark = None  # delete mark
+            self.le_obj.setText("")  # clear line edit
+            self.le_obj_address.setText("")  # clear text box
+        self.show_map()  # repaint map
 
     def show_map(self):
         map_params = {
