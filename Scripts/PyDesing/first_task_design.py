@@ -66,4 +66,7 @@ class Ui_MainWindow(object):
         self.btn_find_obj = QPushButton("Поиск объекта", self.layoutWidget)
         self.btn_find_obj.setFocusPolicy(Qt.ClickFocus)
         self.verticalLayout.addWidget(self.btn_find_obj)
+        self.btn_clear = QPushButton("Сбросить поиск", self.layoutWidget)
+        self.btn_clear.setFocusPolicy(Qt.ClickFocus)
+        self.verticalLayout.addWidget(self.btn_clear)
         MainWindow.setCentralWidget(self.centralwidget)

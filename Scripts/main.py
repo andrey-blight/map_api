@@ -27,6 +27,7 @@ class YandexMap(QMainWindow, Ui_MainWindow):
         self.rbtn_sat.clicked.connect(self.change_conditions)
         self.rbtn_skl.clicked.connect(self.change_conditions)
         self.btn_find_obj.clicked.connect(self.change_conditions)
+        self.btn_clear.clicked.connect(self.change_conditions)
 
     def change_conditions(self):
         if self.sender() == self.rbtn_map:
@@ -54,6 +55,8 @@ class YandexMap(QMainWindow, Ui_MainWindow):
             except IndexError:
                 # if we didn't find object show message about it
                 QMessageBox.about(self, "Info", "Такого объекта не найдено")
+        if self.sender() == self.btn_clear:
+            self.mark = None
         self.show_map()
 
     def show_map(self):

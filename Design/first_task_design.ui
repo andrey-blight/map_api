@@ -57,7 +57,7 @@
       <x>9</x>
       <y>9</y>
       <width>112</width>
-      <height>243</height>
+      <height>272</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -203,6 +203,16 @@
        </property>
        <property name="text">
         <string>Поиск объекта</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_clear">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
+       <property name="text">
+        <string>Сбросить поиск</string>
        </property>
       </widget>
      </item>
