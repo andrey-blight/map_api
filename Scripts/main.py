@@ -57,6 +57,7 @@ class YandexMap(QMainWindow, Ui_MainWindow):
                 QMessageBox.about(self, "Info", "Такого объекта не найдено")
         if self.sender() == self.btn_clear:
             self.mark = None
+            self.le_obj.setText("")
         self.show_map()
 
     def show_map(self):
