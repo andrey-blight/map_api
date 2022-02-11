@@ -64,6 +64,8 @@ class YandexMap(QMainWindow, Ui_MainWindow):
                     self.post = f". Почтовый индекс: {post}"
                 except KeyError:
                     self.post = ". У этого адреса нет почтового индекса"
+                if self.check_post.isChecked():
+                    self.le_obj_address.setText(self.address + self.post)
             except IndexError:
                 # if we didn't find object show message about it
                 QMessageBox.about(self, "Info", "Такого объекта не найдено")
