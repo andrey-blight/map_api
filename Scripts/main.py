@@ -1,5 +1,3 @@
-import math
-
 from PyDesing.design import Ui_MainWindow
 from constans import *
 
