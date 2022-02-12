@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
         self.lbl_map.setFont(font)
         self.layoutWidget = QWidget(self.centralwidget)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(9, 9, 115, 414))
+        self.layoutWidget.setGeometry(QRect(9, 9, 124, 414))
         self.verticalLayout = QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -42,6 +42,7 @@ class Ui_MainWindow(object):
         self.dsp_width = QDoubleSpinBox(self.layoutWidget)
         self.dsp_width.setObjectName(u"dsp_width")
         self.dsp_width.setFocusPolicy(Qt.ClickFocus)
+        self.dsp_width.setDecimals(4)
         self.dsp_width.setMinimum(-90.000000000000000)
         self.dsp_width.setMaximum(90.000000000000000)
         self.dsp_width.setValue(55.750000000000000)
@@ -61,6 +62,7 @@ class Ui_MainWindow(object):
         self.dsp_long = QDoubleSpinBox(self.layoutWidget)
         self.dsp_long.setObjectName(u"dsp_long")
         self.dsp_long.setFocusPolicy(Qt.ClickFocus)
+        self.dsp_long.setDecimals(4)
         self.dsp_long.setMinimum(-180.000000000000000)
         self.dsp_long.setMaximum(180.000000000000000)
         self.dsp_long.setValue(37.609999999999999)
@@ -115,6 +117,7 @@ class Ui_MainWindow(object):
 
         self.check_post = QCheckBox(self.layoutWidget)
         self.check_post.setObjectName(u"check_post")
+        self.check_post.setFocusPolicy(Qt.NoFocus)
 
         self.verticalLayout.addWidget(self.check_post)
 
