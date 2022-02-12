@@ -1,3 +1,5 @@
+import math
+
 from PyDesing.design import Ui_MainWindow
 from constans import *
 
@@ -130,6 +132,37 @@ class YandexMap(QMainWindow, Ui_MainWindow):
                     self.cords_long = -180 + (self.cords_long - 180)
                 self.dsp_long.setValue(self.cords_long)
         self.show_map()  # change and repaint map
+
+    def mousePressEvent(self, event: QMouseEvent):
+        if self.lbl_map.x() <= event.x() <= self.lbl_map.x() + WIDTH \
+                and self.lbl_map.y() <= event.y() <= self.lbl_map.y() + HEIGHT:
+            x, y = event.x() - self.lbl_map.x(), event.y() - self.lbl_map.y()
+            central_x, central_y = WIDTH // 2, HEIGHT // 2
+            ratio_x, ratio_y = (x - central_x) / WIDTH * 2, (central_y - y) / HEIGHT * 2
+            long, width = self.cords_long + self.zoom * 1.87 * ratio_x, self.cords_width + self.zoom * 0.72 * ratio_y
+            if event.button() == Qt.LeftButton:
+                self.obj_mark = f"{long},{width}"
+                self.show_map()
+                map_params = {
+                    "geocode": self.obj_mark,
+                    "apikey": GEOCODER_KEY,
+                    "format": "json",
+                    "results": "1"}
+                response_json = requests.get(GEOCODER_SERVER, params=map_params).json()  # get json with description
+                obj = response_json["response"]["GeoObjectCollection"][
+                    "featureMember"][0]  # get object from description
+                # get address from response
+                self.address = obj["GeoObject"]["metaDataProperty"]["GeocoderMetaData"]["Address"]["formatted"]
+                self.le_obj_address.setText(self.address)  # set address to text box
+                try:
+                    post = obj["GeoObject"]["metaDataProperty"]["GeocoderMetaData"]["Address"]["postal_code"]
+                    self.post = f". Почтовый индекс: {post}"
+                except KeyError:
+                    self.post = ". У этого адреса нет почтового индекса"
+                if self.check_post.isChecked():
+                    self.le_obj_address.setText(self.address + self.post)
+            elif event.button() == Qt.RightButton:
+                pass
 
 
 def except_hook(cls, exception, traceback):
